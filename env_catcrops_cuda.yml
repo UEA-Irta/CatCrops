@@ -1,0 +1,28 @@
+name: catcrops_env
+channels:
+ - pytorch
+ - nvidia
+ - conda-forge
+ - defaults
+dependencies:
+ - geopandas
+ - numpy
+ - pandas
+ - geojson
+ - jupyter
+ - matplotlib
+ - seaborn
+ - pytorch
+ - torchvision
+ - torchaudio
+ - pytorch-cuda=11.8
+ - tqdm
+ - scikit-learn
+ - h5py
+ - requests
+ - pytest
+ # The following packages are only required if you want to use Google Earth Engine
+ - earthengine-api
+ - geemap
+ - geopy
+ - rtree
