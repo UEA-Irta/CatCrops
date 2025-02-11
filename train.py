@@ -1,18 +1,32 @@
 # -*- coding: utf-8 -*-
 """
-Script to train deep learning models.
+Train deep learning models for time series classification on the CatCrops dataset.
 
-This script is executed via command line, allowing users to specify different parameters.
+This script performs the following tasks:
+1. Loads a dataset partition for training and validation based on a specified mode.
+2. Initializes and configures a deep learning model using user-defined hyperparameters.
+3. Trains the model for a specified number of epochs.
+4. Evaluates the model on a validation dataset and computes performance metrics.
+5. Logs training progress and stores model checkpoints for each epoch.
+6. Saves training loss, test loss, and performance metrics (e.g., accuracy, F1-score).
+7. Optionally supports weighted sampling, early stopping, and dataset preprocessing.
 
-Using the script 'train_worker.sh', multiple models can be configured and executed.
+The script supports various training configurations, including:
+- Feature selection (e.g., cloud percentage, day of the year).
+- Custom hyperparameters and batch processing settings.
+
+Usage:
+Run this script from the command line with custom arguments or default settings.
+
+Example:
+    python train.py --model TransformerEncoder --mode evaluation1 --epochs 100 --batchsize 512 --logdir /path/to/results
 
 datetime:27/5/2023 16:50
 """
 
 import argparse
 from catcrops import CatCrops
-from catcrops.models import LSTM, TempCNN, MSResNet, TransformerModel, InceptionTime, StarRNN, OmniScaleCNN, \
-    PETransformerModel
+from catcrops.models import LSTM, TempCNN, MSResNet, TransformerModel, StarRNN, OmniScaleCNN
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 from torch.optim import Adam
@@ -257,25 +271,18 @@ def get_model(modelname, ndims, num_classes, sequencelength, device, **hyperpara
                         use_layernorm=True,
                         device=device,
                         **hyperparameter).to(device)
-    elif modelname == "inceptiontime":
-        model = InceptionTime(input_dim=ndims, num_classes=num_classes, device=device,
-                              **hyperparameter).to(device)
     elif modelname == "msresnet":
         model = MSResNet(input_dim=ndims, num_classes=num_classes, **hyperparameter).to(device)
     elif modelname in ["transformerencoder", "transformer"]:
         model = TransformerModel(input_dim=ndims, num_classes=num_classes,
                                  activation="relu",
                                  **hyperparameter).to(device)
-    elif modelname in ["petransformer", "petransformerencoder"]:
-        model = PETransformerModel(input_dim=ndims, num_classes=num_classes,
-                                   activation="relu",
-                                   **hyperparameter).to(device)
     elif modelname == "tempcnn":
         model = TempCNN(input_dim=ndims, num_classes=num_classes, sequencelength=sequencelength, **hyperparameter).to(
             device)
     else:
-        raise ValueError("invalid model argument. choose from 'TransformerEncoder', 'LSTM', 'MSResNet', 'InceptionTime',"
-                         " 'StarRNN', 'OmniScaleCNN', 'PETransformerEncoder' or 'TempCNN'")
+        raise ValueError("invalid model argument. choose from 'TransformerEncoder', 'LSTM', 'MSResNet', 'StarRNN', "
+                         " 'OmniScaleCNN', or 'TempCNN'")
 
 
     return model
@@ -502,12 +509,12 @@ def parse_args():
     # Model selection and training configuration
     parser.add_argument('--model', type=str, default="TransformerEncoder",
                         help='Select model architecture. Available models: "TransformerEncoder", "LSTM", '
-                             '"InceptionTime", "PETrasnformerEncoder", "TempCNN", "MSRestNet", "StarRNN", "OmniScaleCNN"')
-    parser.add_argument('-SL', '--sequencelength', type=int, default=None,
+                             '"TempCNN", "MSRestNet", "StarRNN", "OmniScaleCNN"')
+    parser.add_argument('-SL', '--sequencelength', type=int, default=70,
                         help='Length of the input time series sequence.')
-    parser.add_argument('--datecrop', type=str, default="26/05/2022",
-                        help='Latest date to crop the time series data.')
-    parser.add_argument('-b', '--batchsize', type=int, default=1024,
+    parser.add_argument('--datecrop', type=str, default="random",
+                        help='Latest date to crop the time series data, can be fixed or "random" (format=DD/MM/YYYY).')
+    parser.add_argument('-b', '--batchsize', type=int, default=512,
                         help='Batch size (number of time series processed simultaneously).')
     parser.add_argument('-e', '--epochs', type=int, default=100,
                         help='Number of training epochs (one full pass through the dataset).')
@@ -558,7 +565,7 @@ def parse_args():
 
     # Feature selection flags
     parser.add_argument('--L2A', action="store_true", help='Use spectral data from Sentinel-2 L2A level.')
-    parser.add_argument('--LST', action="store_true", help='Use Landsat spectral data.')
+    parser.add_argument('--LST', action="store_true", help='Use Landsat spectral data.') # TODO eliminar LST i ET?
     parser.add_argument('--ET', action="store_true", help='Include evapotranspiration (ET) data.')
     parser.add_argument('--pclassid', action="store_true", help='Use the previous year’s classification as input.')
     parser.add_argument('--pcrop', action="store_true", help='Use the previous year’s crop code as input.')
@@ -630,7 +637,7 @@ def get_default_parse_arguments():
     args.preload_ram = False  # If True, load the dataset into RAM for faster training.
     args.wight_sampling = False  # If True, use weighted sampling to balance dataset classes.
     args.device = None  # Computational device: "cpu" or "cuda" (auto-detected if None).
-    args.logdir = "RESULTS"  # Directory to store logs, model checkpoints, and training progress.
+    args.logdir = "./RESULTS"  # Directory to store logs, model checkpoints, and training progress.
 
     # ---------------------------------
     # Feature Selection Options
@@ -656,7 +663,7 @@ def get_default_parse_arguments():
     # ---------------------------------
     # Trial Settings
     # ---------------------------------
-    args.trial = "Trial040-rCrop_r_L2A"  # Identifier for the current experiment.
+    args.trial = "Trial001"  # Identifier for the current experiment.
 
     # Automatically detect computation device if not set
     if args.device is None:
