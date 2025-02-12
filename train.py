@@ -59,7 +59,7 @@ def train(args):
     traindataloader, testdataloader, meta = get_dataloader(args.datapath, args.mode, args.batchsize, args.workers,
                                                            args.preload_ram, args.wight_sampling, args.sequencelength, args.datecrop,
                                                            args.use_previous_year_TS, args.sparse, args.cp, args.doa,
-                                                           args.L2A, args.LST, args.ET, args.pclassid, args.pcrop, args.pvar,
+                                                           args.L2A, args.pclassid, args.pcrop, args.pvar,
                                                            args.sreg, args.mun, args.com, args.prov, args.elev, args.slope, args.noreplace)
 
     num_classes = meta["num_classes"]
@@ -129,16 +129,15 @@ def train(args):
 
 def get_dataloader(datapath, mode, batchsize, workers, preload_ram=False, weight_sampling=False,
                    sequencelength=45, datecrop="26/05/2023", use_previous_year_TS=False, sparse=False, cp=False,
-                   doa=False, L2A=True, LST=False, ET=False, pclassid=False, pcrop=False, pvar=False,
+                   doa=False, L2A=True, pclassid=False, pcrop=False, pvar=False,
                    sreg=False, mun=False, com=False, prov=False, elev=False, slope=False, noreplace=False):
     """
+    #TODO ficar-ho en anglès
     Obté els dataloaders per a l'entrenament i la prova del model.
 
     En funció del mode pots seleccionar diferents datasets.
         - evaluation1: Train(ll22, bt22), Test(ll23, bt23)
-        - evalutaion2: Train(ll21, bt21), Test(ll22, bt22)
-        - evalutaion3: Train(ll22, bt22), Test(ll21, bt21)
-        - evalutaion4: Train(ll23, bt23), Test(ll22, bt22)
+        - evalutaion2: Train(ll23, bt23), Test(ll22, bt22)
 
     Args:
         datapath (str): Path to the dataset directory.
@@ -154,8 +153,6 @@ def get_dataloader(datapath, mode, batchsize, workers, preload_ram=False, weight
         cp (bool): Whether to include cloud percentage information in the time series.
         doa (bool): Whether to include the day of the year in the time series.
         L2A (bool): Whether to use Level-2A spectral data.
-        LST (bool): Whether to include Landsat spectral data.
-        ET (bool): Whether to include evapotranspiration time series.
         pclassid (bool): Whether to use the previous year's crop classification as input.
         pcrop (bool): Whether to include the previous year's crop code.
         pvar (bool): Whether to include the previous year's variety code.
@@ -185,35 +182,21 @@ def get_dataloader(datapath, mode, batchsize, workers, preload_ram=False, weight
 
     # Select the dataset based on the mode
     if mode == "evaluation1":
-        lleida22 = CatCrops(region="lleida", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        baixter22 = CatCrops(region="baixter", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        lleida23 = CatCrops(region="lleida", root=datapath, year=2023, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        baixter23 = CatCrops(region="baixter", root=datapath, year=2023, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
+        lleida22 = CatCrops(region="lleida", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, L2A = L2A, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
+        baixter22 = CatCrops(region="baixter", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, L2A = L2A, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
+        lleida23 = CatCrops(region="lleida", root=datapath, year=2023, preload_ram=preload_ram, transform=transform, L2A = L2A, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
+        baixter23 = CatCrops(region="baixter", root=datapath, year=2023, preload_ram=preload_ram, transform=transform, L2A = L2A, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
         traindataset = data.ConcatDataset([lleida22, baixter22])
         testdataset = data.ConcatDataset([lleida23, baixter23])
     elif mode == "evaluation2":
-        lleida21 = CatCrops(region="lleida", root=datapath, year=2021, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        baixter21 = CatCrops(region="baixter", root=datapath, year=2021, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        lleida22 = CatCrops(region="lleida", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        baixter22 = CatCrops(region="baixter", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        traindataset = data.ConcatDataset([lleida21, baixter21])
-        testdataset = data.ConcatDataset([lleida22, baixter22])
-    elif mode == "evaluation3":
-        lleida21 = CatCrops(region="lleida", root=datapath, year=2021, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        baixter21 = CatCrops(region="baixter", root=datapath, year=2021, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        lleida22 = CatCrops(region="lleida", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        baixter22 = CatCrops(region="baixter", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        traindataset = data.ConcatDataset([lleida22, baixter22])
-        testdataset = data.ConcatDataset([lleida21, baixter21])
-    elif mode == "evaluation4":
-        lleida22 = CatCrops(region="lleida", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        baixter22 = CatCrops(region="baixter", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        lleida23 = CatCrops(region="lleida", root=datapath, year=2023, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        baixter23 = CatCrops(region="baixter", root=datapath, year=2023, preload_ram=preload_ram, transform=transform, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
+        lleida22 = CatCrops(region="lleida", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, L2A = L2A, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
+        baixter22 = CatCrops(region="baixter", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, L2A = L2A, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
+        lleida23 = CatCrops(region="lleida", root=datapath, year=2023, preload_ram=preload_ram, transform=transform, L2A = L2A, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
+        baixter23 = CatCrops(region="baixter", root=datapath, year=2023, preload_ram=preload_ram, transform=transform, L2A = L2A, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
         traindataset = data.ConcatDataset([lleida23, baixter23])
         testdataset = data.ConcatDataset([lleida22, baixter22])
     else:
-        raise ValueError("only --mode 'evaluation1' 'evaluation2', 'evaluation3' or 'evaluation4' allowed")
+        raise ValueError("only --mode 'evaluation1' or 'evaluation2' allowed")
 
     # Create dataloaders
     if weight_sampling:
@@ -516,10 +499,10 @@ def parse_args():
                         help='Latest date to crop the time series data, can be fixed or "random" (format=DD/MM/YYYY).')
     parser.add_argument('-b', '--batchsize', type=int, default=512,
                         help='Batch size (number of time series processed simultaneously).')
-    parser.add_argument('-e', '--epochs', type=int, default=100,
+    parser.add_argument('-e', '--epochs', type=int, default=120,
                         help='Number of training epochs (one full pass through the dataset).')
     parser.add_argument('-m', '--mode', type=str, default="evaluation1",
-                        help='Training mode. "evaluation1" trains on (Lleida+Baixter) 2022 data and validates on 2023 data.')
+                        help='Training mode. "evaluation1" trains on (Lleida+Baixter) 2022 data and validates on 2023 data, while evaluation2 does the reverse (trains on 2023 and tests on 2022).')
 
     # Dataset and hardware settings
     parser.add_argument('-D', '--datapath', type=str, default="catcrops_dataset",
@@ -565,8 +548,6 @@ def parse_args():
 
     # Feature selection flags
     parser.add_argument('--L2A', action="store_true", help='Use spectral data from Sentinel-2 L2A level.')
-    parser.add_argument('--LST', action="store_true", help='Use Landsat spectral data.') # TODO eliminar LST i ET?
-    parser.add_argument('--ET', action="store_true", help='Include evapotranspiration (ET) data.')
     parser.add_argument('--pclassid', action="store_true", help='Use the previous year’s classification as input.')
     parser.add_argument('--pcrop', action="store_true", help='Use the previous year’s crop code as input.')
     parser.add_argument('--pvar', action="store_true", help='Use the previous year’s variety code as input.')
@@ -619,7 +600,7 @@ def get_default_parse_arguments():
     args.sequencelength = 70  # Length of the time series sequence (number of time steps).
     args.datecrop = "random"  # The latest date to crop time series (can be fixed or "random").
     args.batchsize = 512  # Number of time series processed simultaneously in one batch.
-    args.epochs = 50  # Number of training epochs (each epoch is a full pass through the dataset).
+    args.epochs = 120  # Number of training epochs (each epoch is a full pass through the dataset).
     args.mode = "evaluation1"  # Training mode (determines how training and validation data are split).
     args.datapath = "catcrops_dataset"  # Path where the dataset is stored.
     args.workers = 0  # Number of CPU workers used to load the data.
@@ -648,8 +629,6 @@ def get_default_parse_arguments():
     args.cp = False  # Include cloud percentage as an additional input feature.
     args.doa = False  # Include the day of the year as an additional input feature.
     args.L2A = True  # Use Sentinel-2 L2A spectral data.
-    args.LST = False  # Include Landsat spectral data.
-    args.ET = False  # Include evapotranspiration (ET) time series.
     args.pclassid = False  # Use previous year's crop classification as an input feature.
     args.pcrop = False  # Use previous year's crop code as an input feature.
     args.pvar = False  # Use previous year's variety code as an input feature.

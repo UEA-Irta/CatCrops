@@ -4,7 +4,7 @@ Test and evaluate deep learning models for time series classification on the Cat
 
 This script performs the following tasks:
 1. Loads a trained model and selects the best epoch based on a specified performance metric.
-2. Prepares the test dataset using a selected testing mode (e.g., `test2021`, `test2022`, `test2023`).
+2. Prepares the test dataset using a selected testing mode (`test2022`, `test2023`).
 3. Runs inference on the test dataset to generate predictions.
 4. Computes performance metrics such as accuracy, F1-score, and confusion matrices.
 5. Saves results as CSV files and optionally as shapefiles for geospatial analysis.
@@ -75,26 +75,24 @@ l_classname = ['P', "CH", 'C', 'AL', 'GS', 'SR', 'SJ', 'H', 'G', 'CP', 'AE', 'AR
 list_models_n = ['TransformerEncoder', 'LSTM', 'StarRNN', 'MSResNet', 'OmniScaleCNN', 'TempCNN']
 
 def get_dataloader_test(datapath, mode, batchsize, workers, preload_ram=False,
-                   sequencelength=45, datecrop="26/05/2023", use_previous_year_TS=False ,sparse=False, cp=False, doa=False, L2A = True, LST = True, ET=False, pclassid=False, pcrop=False,
+                   sequencelength=45, datecrop="26/05/2023", use_previous_year_TS=False ,sparse=False, cp=False, doa=False, L2A = True, pclassid=False, pcrop=False,
                    pvar=False, sreg=False, mun=False, com=False, prov=False, elev=False, slope=False, noreplace=False,recompile_h5_from_csv=False):
     """
     Retrieves the test dataloaders based on the selected dataset mode.
 
     Args:
         datapath (str): Path to the dataset directory.
-        mode (str): Specifies the dataset to use for testing ('test2021', 'test2022', 'test2023', 'test2024').
+        mode (str): Specifies the dataset to use for testing ('test2022', 'test2023', 'test2024').
         batchsize (int): Number of samples processed per batch.
         workers (int): Number of CPU workers for data loading.
         preload_ram (bool): Whether to load the dataset into RAM.
         sequencelength (int): Length of the time series sequences.
-        datecrop (str): The latest date to crop the time series data.
+        datecrop (str): The latest date to crop the time series data. Date format "DD/MM/YYYY" or "all" to test all dates.
         use_previous_year_TS (bool): Whether to include time series from the previous year.
         sparse (bool): Whether to fill missing time series values with zeros.
         cp (bool): Whether to include cloud probability as an input feature.
         doa (bool): Whether to include the day of the year as an input feature.
         L2A (bool): Whether to use Sentinel-2 L2A spectral data.
-        LST (bool): Whether to include Landsat spectral data.
-        ET (bool): Whether to use evapotranspiration time series.
         pclassid (bool): Whether to include the previous year's crop classification.
         pcrop (bool): Whether to include the previous year's crop code.
         pvar (bool): Whether to include the previous year's variety code.
@@ -124,20 +122,16 @@ def get_dataloader_test(datapath, mode, batchsize, workers, preload_ram=False,
     transform = get_transform_CatCrops(sequencelength, datecrop, use_previous_year_TS ,sparse, cp, doa, noreplace)
 
     # Select the dataset based on the mode
-    if mode == 'test2021':
-        dst_lleida = CatCrops(region="lleida", root=datapath, year=2021, preload_ram=preload_ram, transform=transform, recompile_h5_from_csv=recompile_h5_from_csv, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        dst_baixter = CatCrops(region="baixter", root=datapath, year=2021, preload_ram=preload_ram, transform=transform, recompile_h5_from_csv=recompile_h5_from_csv, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        testdataset = torch.utils.data.ConcatDataset([dst_lleida, dst_baixter])
-    elif mode == 'test2022':
-        dst_lleida = CatCrops(region="lleida", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, recompile_h5_from_csv=recompile_h5_from_csv, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        dst_baixter = CatCrops(region="baixter", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, recompile_h5_from_csv=recompile_h5_from_csv, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
+    if mode == 'test2022':
+        dst_lleida = CatCrops(region="lleida", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, recompile_h5_from_csv=recompile_h5_from_csv, L2A = L2A, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
+        dst_baixter = CatCrops(region="baixter", root=datapath, year=2022, preload_ram=preload_ram, transform=transform, recompile_h5_from_csv=recompile_h5_from_csv, L2A = L2A, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
         testdataset = torch.utils.data.ConcatDataset([dst_lleida, dst_baixter])
     elif mode == "test2023":
-        dst_lleida = CatCrops(region="lleida", root=datapath, year=2023, preload_ram=preload_ram, transform=transform, recompile_h5_from_csv=recompile_h5_from_csv, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
-        dst_baixter = CatCrops(region="baixter", root=datapath, year=2023, preload_ram=preload_ram, transform=transform, recompile_h5_from_csv=recompile_h5_from_csv, L2A = L2A, LST = LST, ET=ET, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
+        dst_lleida = CatCrops(region="lleida", root=datapath, year=2023, preload_ram=preload_ram, transform=transform, recompile_h5_from_csv=recompile_h5_from_csv, L2A = L2A, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
+        dst_baixter = CatCrops(region="baixter", root=datapath, year=2023, preload_ram=preload_ram, transform=transform, recompile_h5_from_csv=recompile_h5_from_csv, L2A = L2A, pclassid=pclassid, pcrop=pcrop, pvar=pvar, sreg=sreg, mun=mun, com=com, prov=prov, elev=elev, slope=slope)
         testdataset = torch.utils.data.ConcatDataset([dst_lleida, dst_baixter])
     else:
-        raise ValueError("only --mode 'test2021' 'test2022' or 'test2023' allowed")
+        raise ValueError("only --mode 'test2022' or 'test2023' allowed")
 
     # Create dataloaders
     testdataloader = DataLoader(testdataset, batch_size=batchsize, shuffle=False, num_workers=workers)
@@ -346,13 +340,13 @@ def parse_args():
     parser.add_argument('-SL', '--sequencelength', type=int, default=None,
                         help='Length of the input time series sequence.')
     parser.add_argument('--datecrop', type=str, default="30/12/2023",
-                        help='Latest date to crop the time series data.')
+                        help='Latest date to crop the time series data. Date format "DD/MM/YYYY" or "all" to test all dates.')
     parser.add_argument('-b', '--batchsize', type=int, default=512,
                         help='Batch size (number of time series processed simultaneously).')
     parser.add_argument('-e', '--epoch', type=int, default=None,
                         help='Epoch number to select the model. If None, the best epoch is chosen based on accuracy.')
     parser.add_argument('-m', '--mode', type=str, default="test2023",
-                        help='Testing mode (e.g., "test2021", "test2022", "test2023", "test2024").')
+                        help='Testing mode (e.g., "test2022", "test2023").')
 
     # ---------------------------------
     # Dataset and Hardware Settings
@@ -406,8 +400,8 @@ def parse_args():
     # Spectral and Environmental Features
     # ---------------------------------
     parser.add_argument('--L2A', action="store_true", help='Use Sentinel-2 L2A spectral data.')
-    parser.add_argument('--LST', action="store_true", help='Include Landsat spectral data.')
-    parser.add_argument('--ET', action="store_true", help='Include evapotranspiration (ET) data.')
+    # parser.add_argument('--LST', action="store_true", help='Include Landsat spectral data.')
+    # parser.add_argument('--ET', action="store_true", help='Include evapotranspiration (ET) data.')
     parser.add_argument('--pclassid', action="store_true", help='Use previous year’s classification as input.')
     parser.add_argument('--pcrop', action="store_true", help='Use previous year’s crop code as input.')
     parser.add_argument('--pvar', action="store_true", help='Use previous year’s variety code as input.')
@@ -493,7 +487,7 @@ def get_default_parse_arguments():
     # ---------------------------------
     # Testing Mode and Date Configuration
     # ---------------------------------
-    args.mode = "test2023"  # Defines which dataset year is used for testing (e.g., "test2021", "test2022", "test2023").
+    args.mode = "test2023"  # Defines which dataset year is used for testing ("test2022", "test2023").
     args.datecrop = "01/06/2023"  # Date format "DD/MM/YYYY" or "all" to test all dates.
     args.sequencelength = None  # Sequence length for time series data.
 
@@ -510,8 +504,8 @@ def get_default_parse_arguments():
     # Spectral and Environmental Features
     # ---------------------------------
     args.L2A = True  # Use Sentinel-2 L2A spectral data.
-    args.LST = False  # Include Landsat spectral data.
-    args.ET = False  # Include evapotranspiration (ET) time series.
+    # args.LST = False  # Include Landsat spectral data.
+    # args.ET = False  # Include evapotranspiration (ET) time series.
     args.pclassid = False  # Use previous year’s crop classification as input.
     args.pcrop = False  # Use previous year’s crop code as input.
     args.pvar = False  # Use previous year’s variety code as input.
@@ -595,7 +589,7 @@ if __name__ == "__main__":
         testdataloader_dict, meta = get_dataloader_test(
             args.datapath, args.mode, args.batchsize, args.workers, args.preload_ram,
             args.sequencelength, datecrop, args.use_previous_year_TS, args.sparse, args.cp,
-            args.doa, args.L2A, args.LST, args.ET, args.pclassid, args.pcrop, args.pvar,
+            args.doa, args.L2A, args.pclassid, args.pcrop, args.pvar,
             args.sreg, args.mun, args.com, args.prov, args.elev, args.slope, args.noreplace,
             args.recompile_h5_from_csv
         )
@@ -661,7 +655,7 @@ if __name__ == "__main__":
                 # Load the dataset for the specified region
                 ds = CatCrops(
                     region=regio, root=args.datapath, year=int(args.mode[-4:]), preload_ram=False,
-                    L2A=args.L2A, LST=args.LST, ET=args.ET, pclassid=args.pclassid, pcrop=args.pcrop,
+                    L2A=args.L2A, pclassid=args.pclassid, pcrop=args.pcrop,
                     pvar=args.pvar, sreg=args.sreg, mun=args.mun, com=args.com, prov=args.prov,
                     elev=args.elev, slope=args.slope
                 )

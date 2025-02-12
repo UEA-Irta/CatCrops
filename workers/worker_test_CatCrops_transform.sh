@@ -28,7 +28,7 @@
 #python test.py --model "TransformerEncoder" --datecrop 'all' -b 1024 \
 #        -m "test2023" -D "/media/hdd11/tipus_c/catcrops_dataset_v2/" --weight-decay 5e-08 \
 #        --learning-rate 1e-3 --preload-ram -l "/media/hdd11/tipus_c/proves_article/P05-CatCrops/RESULTS" \
-#         --use_previous_year_TS --sparse --cp --doa --L2A --ET --trial "Trial008-rCrop_py_s_cp_doa_L2A_ET"
+#         --use_previous_year_TS --sparse --cp --doa --L2A --rCrop_py_s_cp_doa_L2A_pclass_pcrop_pvar_reg_mun_com_pro_e_s" --trial "Trial008-rCrop_py_s_cp_doa_L2A_ET"
 #
 #python test.py --model "TransformerEncoder" --datecrop 'all' -b 512 \
 #        -m "test2023" -D "/media/hdd11/tipus_c/catcrops_dataset_v2/" --weight-decay 5e-08 \
