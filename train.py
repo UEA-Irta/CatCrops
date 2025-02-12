@@ -493,7 +493,7 @@ def parse_args():
     parser.add_argument('--model', type=str, default="TransformerEncoder",
                         help='Select model architecture. Available models: "TransformerEncoder", "LSTM", '
                              '"TempCNN", "MSRestNet", "StarRNN", "OmniScaleCNN"')
-    parser.add_argument('-SL', '--sequencelength', type=int, default=70,
+    parser.add_argument('-SL', '--sequencelength', type=int, default=None,
                         help='Length of the input time series sequence.')
     parser.add_argument('--datecrop', type=str, default="random",
                         help='Latest date to crop the time series data, can be fixed or "random" (format=DD/MM/YYYY).')
