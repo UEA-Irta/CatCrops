@@ -21,8 +21,6 @@ Author:
 - BreizhCrops Team
 - Original repository: https://github.com/dl4sits/BreizhCrops
 
-from
-https://github.com/geekfeiw/Multi-Scale-1D-ResNet/blob/master/model/multi_scale_ori.py
 """
 
 import os
