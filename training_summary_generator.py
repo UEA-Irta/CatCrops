@@ -134,7 +134,8 @@ def generate_training_summary(logdir, stat_l=None, out_folder=None):
     # Iterate over training runs
     for i, run in enumerate(runs, start=1):
         # Extract hyperparameter information from the folder name
-        result = parse_hyperparameters_folder_name(pth.join(logdir, run))
+        # result = parse_hyperparameters_folder_name(pth.join(logdir, run))
+        result = {'Trial': pth.basename(run)}
         # Generate DataFrame and append it to the list
         df_res = get_df(pth.join(logdir, run), result, i)
         list_df.append(df_res)
@@ -148,7 +149,8 @@ def generate_training_summary(logdir, stat_l=None, out_folder=None):
         sta_v = []
         for run in runs:
             # Extract hyperparameters
-            result = parse_hyperparameters_folder_name(pth.join(logdir, run))
+            # result = parse_hyperparameters_folder_name(pth.join(logdir, run))
+            result = {'Trial': pth.basename(run)}
             # Get the best epoch statistics for the given metric
             best_epoch_stats = read_best_epoch_stats(pth.join(logdir, run), stat_name=stat_n)
             # Merge the results
@@ -161,4 +163,5 @@ def generate_training_summary(logdir, stat_l=None, out_folder=None):
 
 # Example usage:
 # generate_training_summary('/path/to/logdir')
-generate_training_summary(r'/media/hdd11/tipus_c/proves/P11/RESULTS', r'/media/hdd11/tipus_c/proves/P11/RESULTS/v1')
+# generate_training_summary(r'/RESULTS')
+# generate_training_summary(r'/home/usuari11/Documents/catcrops/RESULTS/')

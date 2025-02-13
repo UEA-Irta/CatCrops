@@ -42,7 +42,6 @@ import time
 from datetime import timedelta
 import argparse
 
-# os.environ['PROJ_LIB'] = r'~/anaconda3/envs/ge/share/proj'
 
 # Default values
 list_ae = ['lleida', 'baixter']

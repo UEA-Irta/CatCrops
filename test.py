@@ -400,8 +400,6 @@ def parse_args():
     # Spectral and Environmental Features
     # ---------------------------------
     parser.add_argument('--L2A', action="store_true", help='Use Sentinel-2 L2A spectral data.')
-    # parser.add_argument('--LST', action="store_true", help='Include Landsat spectral data.')
-    # parser.add_argument('--ET', action="store_true", help='Include evapotranspiration (ET) data.')
     parser.add_argument('--pclassid', action="store_true", help='Use previous year’s classification as input.')
     parser.add_argument('--pcrop', action="store_true", help='Use previous year’s crop code as input.')
     parser.add_argument('--pvar', action="store_true", help='Use previous year’s variety code as input.')
@@ -504,8 +502,6 @@ def get_default_parse_arguments():
     # Spectral and Environmental Features
     # ---------------------------------
     args.L2A = True  # Use Sentinel-2 L2A spectral data.
-    # args.LST = False  # Include Landsat spectral data.
-    # args.ET = False  # Include evapotranspiration (ET) time series.
     args.pclassid = False  # Use previous year’s crop classification as input.
     args.pcrop = False  # Use previous year’s crop code as input.
     args.pvar = False  # Use previous year’s variety code as input.

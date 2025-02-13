@@ -1,3 +1,26 @@
+"""
+LongShortTermMemory - PyTorch Implementation for Time Series Classification
+
+This script defines the `LSTM` class, a PyTorch-based Long Short-Term Memory (LSTM) model
+designed for time series classification.
+
+This script is a direct copy of the LSTM implementation from the BreizhCrops repository
+and has not been modified in any way.
+
+Original source:
+BreizhCrops GitHub repository:
+https://github.com/dl4sits/BreizhCrops/blob/master/breizhcrops/models/LongShortTermMemory.py
+
+Acknowledgment:
+This script is a direct copy of the LSTM implementation from the BreizhCrops repository
+and has not been modified. It is included here to ensure compatibility with related code.
+
+
+Author:
+- BreizhCrops Team
+- Original repository: https://github.com/dl4sits/BreizhCrops
+"""
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

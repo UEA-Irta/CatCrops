@@ -1,3 +1,26 @@
+"""
+StarRNN - PyTorch Implementation for Recurrent Neural Networks
+
+This script defines the `StarRNN` class, a PyTorch-based recurrent neural network architecture
+designed for time series classification.
+
+This script is a direct copy of the StarRNN implementation from the BreizhCrops repository
+and has not been modified in any way. No additional comments or documentation have been added.
+
+Original source:
+BreizhCrops GitHub repository:
+https://github.com/dl4sits/BreizhCrops/blob/master/breizhcrops/models/StarRNN.py
+
+Acknowledgment:
+This script is a direct copy of the original implementation from the BreizhCrops repository.
+
+Author:
+- Türkoglu Mehmet Özgür <ozgur.turkoglu@geod.baug.ethz.ch>
+- BreizhCrops Team
+- Original repository: https://github.com/dl4sits/BreizhCrops
+
+"""
+
 import torch.nn as nn
 import torch.utils.data
 import os
@@ -8,9 +31,6 @@ import torch.nn.functional as F
 import torch.nn.init as init
 import math
 
-"""
-__author__ = Türkoglu Mehmet Özgür <ozgur.turkoglu@geod.baug.ethz.ch>
-"""
 
 __all__ = ['StarRNN']
 

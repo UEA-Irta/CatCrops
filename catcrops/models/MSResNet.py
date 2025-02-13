@@ -1,13 +1,34 @@
-import os
-
-import torch
-import torch.nn as nn
-import torch.nn.functional as Functional
-
 """
+MSResNet - PyTorch Implementation for Multi-Scale Residual Network
+
+This script defines the `MSResNet` class, a PyTorch-based Multi-Scale Residual Network (MSResNet)
+designed for time series classification.
+
+This script is a direct copy of the MSResNet implementation from the BreizhCrops repository,
+which is itself based on the original work by **geekfeiw**:
+- Original MSResNet repository: https://github.com/geekfeiw/Multi-Scale-1D-ResNet
+
+Original source:
+BreizhCrops GitHub repository:
+https://github.com/dl4sits/BreizhCrops/blob/master/breizhcrops/models/MSResNet.py
+
+Acknowledgment:
+This script is a direct copy of the MSResNet implementation from the BreizhCrops repository,
+which is itself based on the original Multi-Scale 1D ResNet by geekfeiw. No modifications have been made.
+
+Author:
+- geekfeiw (Original MSResNet)
+- BreizhCrops Team
+- Original repository: https://github.com/dl4sits/BreizhCrops
+
 from
 https://github.com/geekfeiw/Multi-Scale-1D-ResNet/blob/master/model/multi_scale_ori.py
 """
+
+import os
+import torch
+import torch.nn as nn
+import torch.nn.functional as Functional
 
 __all__ = ['MSResNet']
 

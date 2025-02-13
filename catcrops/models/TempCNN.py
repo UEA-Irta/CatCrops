@@ -1,15 +1,35 @@
-import os
+"""
+TempCNN - PyTorch Implementation for Time Series Classification
 
+This script defines the `TempCNN` class, a PyTorch-based Temporal Convolutional Neural Network (TempCNN)
+for time series classification.
+
+This script is a direct copy of the TempCNN implementation from the BreizhCrops repository,
+which is based on the original work by **Pelletier et al. (2019)**:
+- Original repository: https://github.com/charlotte-pel/temporalCNN
+- Research paper: https://www.mdpi.com/2072-4292/11/5/523
+
+Original source:
+BreizhCrops GitHub repository:
+https://github.com/dl4sits/BreizhCrops/blob/master/breizhcrops/models/TempCNN.py
+
+Acknowledgment:
+This script is a direct copy of the TempCNN implementation from the BreizhCrops repository,
+which in turn is based on the original TempCNN model by Pelletier et al. No modifications have been made.
+
+Author:
+- Pelletier et al. (Original TempCNN)
+- BreizhCrops Team
+- Original repository: https://github.com/dl4sits/BreizhCrops
+
+"""
+
+import os
 import torch
 import torch.nn as nn
 import torch.utils.data
 
-"""
-Pytorch re-implementation of Pelletier et al. 2019
-https://github.com/charlotte-pel/temporalCNN
 
-https://www.mdpi.com/2072-4292/11/5/523
-"""
 
 __all__ = ['TempCNN']
 
