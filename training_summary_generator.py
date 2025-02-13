@@ -6,6 +6,10 @@ List of available statistics:
 ['accuracy', 'kappa', 'f1_micro', 'f1_macro', 'f1_weighted', 'recall_micro', 'recall_macro', 'recall_weighted',
  'precision_micro', 'precision_macro', 'precision_weighted', 'trainloss', 'testloss']
 
+
+Example usage:
+    generate_training_summary(r'/RESULTS')
+
 author: magipamies
 datetime: 4/6/2023 21:03
 """
@@ -160,8 +164,3 @@ def generate_training_summary(logdir, stat_l=None, out_folder=None):
         # Create DataFrame and save to CSV
         df_st_val = pd.DataFrame(sta_v)
         df_st_val.to_csv(pth.join(out_folder, f"best_{stat_n}.csv"))
-
-# Example usage:
-# generate_training_summary('/path/to/logdir')
-# generate_training_summary(r'/RESULTS')
-# generate_training_summary(r'/home/usuari11/Documents/catcrops/RESULTS/')

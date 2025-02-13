@@ -1,0 +1,19 @@
+geopandas
+numpy
+pandas
+geojson
+jupyter
+matplotlib
+seaborn
+torch
+torchvision
+torchaudio
+tqdm
+scikit-learn
+h5py
+requests
+pytest
+earthengine-api  # Only required if using Google Earth Engine
+geemap  # Only required if using Google Earth Engine
+geopy  # Only required if using Google Earth Engine
+rtree  # Only required if using Google Earth Engine
