@@ -54,7 +54,7 @@ import argparse
 import os
 from os import path as pth
 import glob
-from training_summary_generator import read_best_epoch_stats
+from catcrops.evaluation_utils import read_best_epoch_stats
 from train import get_model, test_epoch, metrics
 from catcrops import CatCrops
 import pandas as pd

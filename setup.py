@@ -32,7 +32,7 @@ setup(
     contact="IRTA - Us Eficient de l'Aigua",
     contcat_email='irta.remote.sensing@gmail.com',
     description=SHORT_DESCRIPTION,
-    long_description=open('README.md').read(),
+    long_description=open('proves/README.md').read(),
     long_description_content_type='text/markdown',
     install_requires=requirements,  # Dependències des del requirements.txt
     python_requires='>=3.10',

@@ -26,26 +26,49 @@ dict_vn = {"lr": "learning-rate", "wd": "weight-decay", "sl": "sequencelength", 
 
 def parse_hyperparameters_folder_name(run):
     """
-    Parses the hyperparameter folder name to extract configuration details.
+    Parses the folder name to extract hyperparameter configurations.
+
+    This function takes a folder name that contains hyperparameter values in the format:
+        "model_param1=value1_param2=value2_..."
+    and returns a dictionary with the extracted hyperparameters.
 
     Args:
-        run (str): Path to the training folder.
+        run (str): The name or path of the training folder.
 
     Returns:
-        dict: Dictionary containing extracted hyperparameters and the model name.
+        dict: A dictionary containing:
+            - Extracted hyperparameters as key-value pairs.
+            - The model name under the key `"model"` if parsing is successful.
+            - If parsing fails, stores the folder name under `"Trial"`.
     """
+
+    # Extract only the folder name from the full path (if a path is provided)
     run = pth.basename(run)
-    model, *hyperparameter_str = run.split("_")
     hyperparameter = {}
 
-    for kv in hyperparameter_str:
-        k, v = kv.split("=")
-        k = dict_vn.get(k, k)  # Replace abbreviation with full name if it exists
-        if k == "trans_type":
-            v = v.replace("-", "_")  # Convert dashes to underscores for uniformity
-        hyperparameter[k] = v
+    try:
+        # Ensure the folder name contains at least one "=" sign before attempting to parse
+        assert "=" in run
 
-    hyperparameter["model"] = model  # Store model name
+        # Split the folder name by "_" and separate the model name from the hyperparameters
+        model, *hyperparameter_str = run.split("_")
+
+        # Iterate through the hyperparameter key-value pairs
+        for kv in hyperparameter_str:
+            k, v = kv.split("=")  # Separate the key and value
+            k = dict_vn.get(k, k)  # Replace abbreviation with full name if it exists
+            if k == "trans_type":
+                v = v.replace("-", "_")  # Convert dashes to underscores for uniformity
+            hyperparameter[k] = v
+
+        # Store the model name under the "model" key
+        hyperparameter["model"] = model  # Store model name
+
+    except:
+
+        # If parsing fails (e.g., no "=" in the folder name), store the folder name as "Trial"
+        hyperparameter["Trial"] = run
+
     return hyperparameter
 
 
@@ -92,7 +115,7 @@ def get_df(run, dict_h, tn=None):
     Args:
         run (str): Path to the folder containing "trainlog.csv".
         dict_h (dict): Dictionary with additional columns and values to add to the DataFrame.
-        tn (int, optional): Trial number. If provided, adds a "Trail" column with the corresponding value.
+        tn (int, optional): Trial number. If provided, adds a "T" column with the corresponding value.
 
     Returns:
         pandas.DataFrame: DataFrame containing the training log and additional information.
@@ -103,13 +126,13 @@ def get_df(run, dict_h, tn=None):
     for k, v in dict_h.items():
         df[k] = v
 
-    if tn:  # If a trial number is provided, add a "Trail" column
-        df["Trail"] = f"T{tn}"
+    if tn:  # If a trial number is provided, add a "T" column
+        df["T"] = f"T{tn}"
 
     return df
 
 
-def generate_training_summary(logdir, stat_l=None, out_folder=None):
+def generate_training_summary(logdir, stat_l=None, out_folder=None, div_h=False):
     """
     Generates summary CSV files from training logs.
 
@@ -117,14 +140,37 @@ def generate_training_summary(logdir, stat_l=None, out_folder=None):
         logdir (str): Path to the directory containing training runs.
         stat_l (list, optional): List of statistics to analyze. If None, a default list is used.
         out_folder (str, optional): Path to save the output files. Defaults to `logdir` if not specified.
+        div_h (bool, optional): Determines how the folder name is processed:
+            - If `True`: The folder name is **parsed into hyperparameters**, assuming each hyperparameter
+              is in the format `param=value` (e.g.,
+                    `"TransformerEncoder_input-dim=12_lr=0.00699_tt=SL-doa-cp-datecrop_dc=15072022_mode=evaluation2"`).
+            - If `False`: The entire folder name is used as a **single trial name**, without extracting hyperparameters.
+
+        Default Statistics (`stat_l`):
+            If no custom list is provided, the function uses the following default metrics:
+            - `"accuracy"`: Overall classification accuracy.
+            - `"kappa"`: Cohen's kappa coefficient (measures inter-rater agreement).
+            - `"f1_micro"`: F1-score using micro-averaging (weighted by instance count).
+            - `"f1_macro"`: F1-score using macro-averaging (unweighted mean across classes).
+            - `"f1_weighted"`: F1-score weighted by class frequencies.
+            - `"recall_micro"`: Recall using micro-averaging.
+            - `"recall_macro"`: Recall using macro-averaging.
+            - `"recall_weighted"`: Recall weighted by class frequencies.
+            - `"precision_micro"`: Precision using micro-averaging.
+            - `"precision_macro"`: Precision using macro-averaging.
+            - `"precision_weighted"`: Precision weighted by class frequencies.
+            - `"testloss"`: Loss function value on the test set.
 
     Outputs:
         - all_trainlog.csv: Combined CSV file with all training logs.
         - best_<stat>.csv: CSV files with the best epoch for each metric in the training runs.
-    """
-    if out_folder is None:
-        out_folder = logdir  # Default output folder is the log directory
 
+    """
+     # Default output folder is the log directory if not specified
+    if out_folder is None:
+        out_folder = logdir
+
+    # Default list of statistics to analyze
     if stat_l is None:
         stat_l = ['accuracy', 'kappa', 'f1_micro', 'f1_macro', 'f1_weighted', 'recall_micro', 'recall_macro',
                   'recall_weighted', 'precision_micro', 'precision_macro', 'precision_weighted', 'testloss']
@@ -132,15 +178,15 @@ def generate_training_summary(logdir, stat_l=None, out_folder=None):
     # Select valid training runs (folders that contain "trainlog.csv")
     runs = [run for run in os.listdir(logdir) if pth.exists(pth.join(logdir, run, "trainlog.csv"))]
 
-    # Create a list to store DataFrames
+    # Create a list to store DataFrames from all runs
     list_df = []
 
     # Iterate over training runs
     for i, run in enumerate(runs, start=1):
-        # Extract hyperparameter information from the folder name
-        # result = parse_hyperparameters_folder_name(pth.join(logdir, run))
-        result = {'Trial': pth.basename(run)}
-        # Generate DataFrame and append it to the list
+        # Extract hyperparameter information based on `div_h`
+        result = parse_hyperparameters_folder_name(pth.join(logdir, run)) if div_h else {'Trial': pth.basename(run)}
+
+        # Generate DataFrame for the current run and add it to the list
         df_res = get_df(pth.join(logdir, run), result, i)
         list_df.append(df_res)
 
@@ -152,9 +198,8 @@ def generate_training_summary(logdir, stat_l=None, out_folder=None):
     for stat_n in stat_l:
         sta_v = []
         for run in runs:
-            # Extract hyperparameters
-            # result = parse_hyperparameters_folder_name(pth.join(logdir, run))
-            result = {'Trial': pth.basename(run)}
+            # Extract hyperparameter details or use folder name as trial name
+            result = parse_hyperparameters_folder_name(pth.join(logdir, run)) if div_h else {'Trial': pth.basename(run)}
             # Get the best epoch statistics for the given metric
             best_epoch_stats = read_best_epoch_stats(pth.join(logdir, run), stat_name=stat_n)
             # Merge the results
