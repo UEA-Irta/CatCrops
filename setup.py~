@@ -13,7 +13,7 @@ def parse_requirements(filename):
             if line.strip() and not line.startswith('#')
         ]
 
-SHORT_DESCRIPTION = 'A Satellite Time Series Dataset for Crop Type Identification'
+SHORT_DESCRIPTION = 'Library to run CatCrops'
 
 # Càrrega de les dependències
 requirements = parse_requirements('requirements.txt')
@@ -27,6 +27,8 @@ setup(
     license='GPL',
     author="IRTA - Us Eficient de l'Aigua",
     author_email='irta.remote.sensing@gmail.com',
+    maintainer='magipamies',
+    maintainer_email='magipamies@gmail.com',
     contact="IRTA - Us Eficient de l'Aigua",
     contcat_email='irta.remote.sensing@gmail.com',
     description=SHORT_DESCRIPTION,
@@ -38,7 +40,10 @@ setup(
         "Development Status :: Beta",
         "Intended Audience :: Science/Research",
         "Topic :: Scientific/Engineering :: Agricultural Science",
+        "Topic :: Scientific/Engineering :: Hydrology",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3"]
+        "Programming Language :: Python :: 3"],
+    keywords=['SEN-ET', 'Evapotranspiration',
+              'Sentinel-2', 'Sentinel-3', 'SLSTR', 'Remote Sensing']
 )
