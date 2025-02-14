@@ -10,12 +10,13 @@ This script allows you to:
 
 Usage:
 Run the script from the terminal with the following command:
-    python download_dataset.py --url "https://www.kaggle.com/api/v1/datasets/download/irtaremotesensing/catcrops-dataset" --zip_path "catcrops_dataset.zip" --extract_folder "catcrops_dataset/"
+    python download_dataset.py --url "https://www.kaggle.com/api/v1/datasets/download/irtaremotesensing/catcrops-dataset" --zip_path "catcrops_dataset.zip" --extract_folder "./"
 
 Arguments:
     --url             URL of the ZIP file to download.
     --zip_path        Path where the downloaded ZIP file will be saved.
     --extract_folder  Folder where the ZIP file will be extracted.
+    --keep_zip        Keep the ZIP file after extraction.
 
 author:
 datetime:14/2/2025 14:42

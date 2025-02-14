@@ -45,7 +45,7 @@ import argparse
 
 # Default values
 list_ae = ['lleida', 'baixter']
-list_any = ["2021", "2022", "2023"]
+list_any = ["2022", "2023"]
 zona_default = list_ae[0]
 div_ss_default = 1
 data_inici_default = "20220101"
