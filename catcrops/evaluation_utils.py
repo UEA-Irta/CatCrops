@@ -8,9 +8,9 @@ List of available statistics:
 
 
 Example usage:
-    generate_training_summary(r'/RESULTS')
+    catcrops.generate_training_summary(r'/RESULTS')
 
-author: magipamies
+author:
 datetime: 4/6/2023 21:03
 """
 

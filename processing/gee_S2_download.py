@@ -24,7 +24,7 @@ for the specified time range and extracts pixel values for each polygon.
 - Files include spectral bands, cloud probability, date of acquisition, and polygon ID.
 - Logs are generated to track parcels that could not be processed.
 
-author: magipamies
+author:
 datetime:1/12/2023 12:58
 """
 
