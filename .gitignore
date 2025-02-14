@@ -245,5 +245,3 @@ cython_debug/
 build/*
 dist/*
 *.egg-info/*
-*~!/proves/
-proves/*
