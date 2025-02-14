@@ -1,12 +1,7 @@
 # CatCrops - Crop Type Classification Library
 
-**CatCrops** is a Python library designed for **early crop type classification and mapping** using a combination 
-of **remote sensing data and ancillary information**. 
-
-This repository contains the implementation of **CatCrops**, which is used in the academic paper:
-
-
-**Early Crop Type Classification and Mapping Combining Remote Sensing and Ancillary Data**  
-(*Authors, Year, Journal/Conference - Add citation details here*)
-
-The README will be expanded soon with more details about the implementation and usage.
+This repository contains the implementation of CatCrops, which is used in the scientific paper: 
+ 
+"Early Crop Type Classification and Mapping Combining Remote Sensing and Ancillary Data" by Gené-Mola, J., Pamies-Sans, M., Minuesa, C., Casadesús, J., and Bellvert, J. (2025, submitted).
+ 
+The README will be expanded upon the publication of the corresponding research paper.
