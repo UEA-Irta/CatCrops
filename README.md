@@ -101,7 +101,7 @@ For more information about the dataset structure, refer to [CatCrops_Dataset.md]
 explains how the dataset is organized.
 
 
-## Example Code
+## Usage examples
 
 To run an example of training and testing using the CatCrops library, follow these steps. All commands must be 
 executed from the [processing](processing) directory.
@@ -168,14 +168,20 @@ python gee_S2_download.py -Z lleida -A 2023 -I 20220101 -F 2024010 -D ./catcrops
 
 ## Interactive Map
 
-You can explore the crop classification results on the interactive map:  
-🔗 [CatCrops Interactive Map](https://catcrops2023.irtav7.cat/)
+You can explore the crop classification results on the [CatCrops Interactive Map](https://catcrops2023.irtav7.cat/)
+[![Catcrops Interactive Map](docs/catcrops_map.jpg)](https://catcrops2023.irtav7.cat/)
 
 
-### Acknowledgment and Reference to BreizhCrops
-The BreizhCrops repository ([BreizhCrops GitHub](https://github.com/dl4sits/BreizhCrops)) has been used as a starting point for the development of `CatCrops`. 
-We used its dataset structure as a reference to design and organize the CatCrops Dataset, adapting it to our specific needs.
-The only scripts that remain unchanged from the original BreizhCrops repository are those that define the different deep learning models.
+## Acknowledgment and Reference
+* The BreizhCrops repository ([BreizhCrops GitHub](https://github.com/dl4sits/BreizhCrops)) has been used as a starting 
+    point for the development of `CatCrops`. We used its dataset structure as a reference to design and organize the 
+    CatCrops Dataset, adapting it to our specific needs. The only scripts that remain unchanged from the original 
+    BreizhCrops repository are those that define the different deep learning models.
+
+* The data from the DUN has ben obtained from the [Mapa de cultius DUN-SIGPAC](https://agricultura.gencat.cat/ca/ambits/desenvolupament-rural/sigpac/mapa-cultius/index.html)
+  of the Department d'Agricultura, Ramaderia, Pesca i Alimentació de la Generalitat de Catalunya.
+
+
 
 ## Reference
 "Early Crop Type Classification and Mapping Combining Remote Sensing and Ancillary Data" by Gené-Mola, J., Pamies-Sans, M., Minuesa, C., Casadesús, J., and Bellvert, J. (2025, submitted).
