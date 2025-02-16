@@ -18,7 +18,9 @@ Key Features:
     - sparse -> It allows to use timeseries of one year and set to 0 the dates that no spectral data is available.
 
 Author:
-    -
+- Jordi Gené Mola
+- Magí Pàmies Sans
+
 datetime:27/5/2023 16:50
 """
 

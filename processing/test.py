@@ -46,6 +46,9 @@ Run this script from the command line with custom arguments or default settings.
 
 Example:
     python test.py --model TransformerEncoder --mode test2023 --batchsize 512 --logdir /path/to/results
+Author:
+- Jordi Gené Mola
+- Magí Pàmies Sans
 
 datetime:27/5/2023 16:50
 """

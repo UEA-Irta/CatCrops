@@ -21,6 +21,10 @@ Run this script from the command line with custom arguments or default settings.
 Example:
     python train.py --model TransformerEncoder --mode evaluation1 --epochs 100 --batchsize 512 --logdir /path/to/results
 
+Author:
+- Jordi Gené Mola
+- Magí Pàmies Sans
+
 datetime:27/5/2023 16:50
 """
 

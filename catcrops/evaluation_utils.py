@@ -10,7 +10,10 @@ List of available statistics:
 Example usage:
     catcrops.generate_training_summary(r'/RESULTS')
 
-author:
+Author:
+- Jordi Gené Mola
+- Magí Pàmies Sans
+
 datetime: 4/6/2023 21:03
 """
 

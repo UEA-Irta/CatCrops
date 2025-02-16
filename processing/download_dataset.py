@@ -18,7 +18,10 @@ Arguments:
     --extract_folder  Folder where the ZIP file will be extracted.
     --keep_zip        Keep the ZIP file after extraction.
 
-author:
+Author:
+- Jordi Gené Mola
+- Magí Pàmies Sans
+
 datetime:14/2/2025 14:42
 """
 

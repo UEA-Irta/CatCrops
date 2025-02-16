@@ -25,7 +25,10 @@ To instantiate the dataset:
 
     dataset = CatCrops(region="lleida", root="./catcrops_dataset/", year=2023, preload_ram=False, L2A=True)
 
-author:
+Author:
+- Jordi Gené Mola
+- Magí Pàmies Sans
+
 datetime:27/5/2023 16:50
 """
 import os

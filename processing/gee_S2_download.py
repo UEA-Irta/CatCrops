@@ -24,7 +24,10 @@ for the specified time range and extracts pixel values for each polygon.
 - Files include spectral bands, cloud probability, date of acquisition, and polygon ID.
 - Logs are generated to track parcels that could not be processed.
 
-author:
+Author:
+- Jordi Gené Mola
+- Magí Pàmies Sans
+
 datetime:1/12/2023 12:58
 """
 
@@ -51,7 +54,7 @@ div_ss_default = 1
 data_inici_default = "20220101"
 data_final_default = "20240101"
 any_d_default = list_any[-1]
-dataset_fold_default = r'catcrops_dataset'
+dataset_fold_default = r'./catcrops_dataset'
 error_fold_default = dataset_fold_default
 
 f_out_txt = None
