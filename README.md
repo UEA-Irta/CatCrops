@@ -185,3 +185,7 @@ You can explore the crop classification results on the [CatCrops Interactive Map
 
 ## Reference
 "Early Crop Type Classification and Mapping Combining Remote Sensing and Ancillary Data" by Gené-Mola, J., Pamies-Sans, M., Minuesa, C., Casadesús, J., and Bellvert, J. (2025, submitted).
+
+
+## Contact
+For issues or feature requests, please contact: jordi.gene@irta.cat, magi.pamies@irta.cat.
