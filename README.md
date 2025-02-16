@@ -172,7 +172,7 @@ You can explore the crop classification results on the [CatCrops Interactive Map
 [![Catcrops Interactive Map](docs/catcrops_map.jpg)](https://catcrops2023.irtav7.cat/)
 
 
-## Acknowledgment and Reference
+## Acknowledgment
 * The BreizhCrops repository ([BreizhCrops GitHub](https://github.com/dl4sits/BreizhCrops)) has been used as a starting 
     point for the development of `CatCrops`. We used its dataset structure as a reference to design and organize the 
     CatCrops Dataset, adapting it to our specific needs. The only scripts that remain unchanged from the original 
