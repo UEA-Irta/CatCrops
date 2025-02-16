@@ -163,7 +163,7 @@ python gee_S2_download.py -Z lleida -A 2023 -I 20220101 -F 2024010 -D ./catcrops
 - `-N <number>` → Defines the **number of parcels per subset to download at once**.  
 - `-B` → Enables **appending new data** to existing files.  
 - `-O` → Enables **overwriting existing files**.  
-- `-E <error_folder>` → Specifies the **path to save error logs** for parcels that could not be downloaded. If set to `None`, no error files will be saved.
+- `-E <error_folder>` → Specifies the **path to save error logs** for parcels that could not be downloaded. If set to None, no error files will be saved.
 
 
 ## Interactive Map
