@@ -1,7 +1,7 @@
 # CatCrops Dataset
 This document describes the structure of the **CatCrops** dataset, including file organization and data descriptions.
 
-The **CatCrops Dataset** is hosted on Kaggle and can be accessed through the following link: [CatCrops Dataset on Kaggle](https://www.kaggle.com/datasets/irtaremotesensing/catcrops-dataset)
+The **CatCrops Dataset** is hosted on Kaggle and can be accessed through the [CatCrops Dataset on Kaggle](https://www.kaggle.com/datasets/irtaremotesensing/catcrops-dataset)
 
 ## Dataset Folder Structure
 

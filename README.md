@@ -8,10 +8,11 @@ The README will be expanded upon the publication of the corresponding research p
 
 
 ## Instalation
-To ensure proper functionality, we recommend using Anaconda to manage dependencies. Follow these steps to install the required environment and the `CatCrops` library.
+To ensure proper functionality, we recommend using Anaconda to manage dependencies. Follow these steps to install the 
+required environment and the CatCrops library.
 
 #### 1. Clone the Repository  
-First, clone the `CatCrops` repository from GitHub: 
+First, clone the CatCrops repository from GitHub: 
 ```bash
 git clone https://github.com/UEA-Irta/CatCrops.git
 ```
@@ -25,7 +26,7 @@ conda --version
 ```
 
 #### 3. Create and Activate the Conda Environment  
-Navigate to the root directory of the repository and create the environment using the [`env_catcrops.yml`](env_catcrops.yml) file:  
+Navigate to the root directory of the repository and create the environment using the [env_catcrops.yml](env_catcrops.yml) file:  
 ```bash
 conda env create -f env_catcrops.yml
 ```
@@ -35,43 +36,46 @@ Then, activate the environment:
 conda activate catcrops_env
 ```
 
-#### 4. Install `CatCrops` from `setup.py`  
-Once the environment is activated, install the `CatCrops` library:  
+#### 4. Install CatCrops from setup.py  
+Once the environment is activated, install the CatCrops library:  
 ```bash
 pip install ./
 ```
 
-This will install `CatCrops` in editable mode, meaning any modifications in the source code will be reflected 
+This will install CatCrops in editable mode, meaning any modifications in the source code will be reflected 
 immediately without needing to reinstall.
 
 #### 5. Verify the Installation  
 To confirm that everything is installed correctly, run:  
-`python -c "import catcrops; print('CatCrops installed successfully!')"`  
-
-Now, `CatCrops` is ready to use within your Anaconda environment.
+```bash
+python -c "import catcrops; print('CatCrops installed successfully!')"  
+```
+Now, CatCrops is ready to use within your Anaconda environment.
 
 
 ## CatCrops Dataset
 
-The `CatCrops Dataset` is hosted on Kaggle and can be accessed through the following link: [CatCrops Dataset on Kaggle](https://www.kaggle.com/datasets/irtaremotesensing/catcrops-dataset)
+The CatCrops Dataset is hosted on Kaggle and can be accessed through the [CatCrops Dataset on Kaggle](https://www.kaggle.com/datasets/irtaremotesensing/catcrops-dataset)
 
-For direct download, use the following link: [Download CatCrops Dataset](https://www.kaggle.com/api/v1/datasets/download/irtaremotesensing/catcrops-dataset-csv)
+For direct download, use the following link: 
+* [Download CatCrops Dataset](https://www.kaggle.com/api/v1/datasets/download/irtaremotesensing/catcrops-dataset-csv)
 
 If you prefer a lighter version of the dataset, you can download the pre-processed version with the HDF5 files 
-already generated from the following link: [Download Lightweight CatCrops Dataset](https://www.kaggle.com/api/v1/datasets/download/irtaremotesensing/catcrops-dataset-hd5)
+already generated from the following link: 
+* [Download Lightweight CatCrops Dataset](https://www.kaggle.com/api/v1/datasets/download/irtaremotesensing/catcrops-dataset-hd5)
 
 
 ### How to Download and Extract the Dataset Automatically
-You can automatically download and extract the dataset using the script [`"download_dataset.py"`](processing/download_dataset.py).
+You can automatically download and extract the dataset using the script [download_dataset.py](processing/download_dataset.py).
 
-Navigate to the `processing/` folder and execute:
+Navigate to the [processing](processing) folder and execute:
 ```bash
 python download_dataset.py --url "https://www.kaggle.com/api/v1/datasets/download/irtaremotesensing/catcrops-dataset-csv" --zip_path "catcrops_dataset.zip" --extract_folder "./"
 ```
 
 ### Dataset Structure
 
-The `CatCrops Dataset` follows this directory structure:
+The CatCrops Dataset follows this directory structure:
 
 ```tree
 <root>                           # Root directory of the dataset
@@ -93,14 +97,14 @@ The `CatCrops Dataset` follows this directory structure:
 │   │   │   │   ├── ...
 ```
 
-For more information about the dataset structure, refer to [`CatCrops_Dataset`](docs/CatCrops_Dataset.md), which 
+For more information about the dataset structure, refer to [CatCrops_Dataset.md](docs/CatCrops_Dataset.md), which 
 explains how the dataset is organized.
 
 
 ## Example Code
 
-To run an example of training and testing using the `CatCrops` library, follow these steps. All commands must be 
-executed from the `processing/` directory.
+To run an example of training and testing using the CatCrops library, follow these steps. All commands must be 
+executed from the [processing](processing) directory.
 
 #### 1. Download the Dataset  
 If you have not yet downloaded the dataset, first run:
@@ -108,13 +112,13 @@ If you have not yet downloaded the dataset, first run:
 python download_dataset.py --url "https://www.kaggle.com/api/v1/datasets/download/irtaremotesensing/catcrops-dataset-csv" --zip_path "catcrops_dataset.zip" --extract_folder "./"
 ```
 #### 2. Train a Model  
-Once the dataset is available, you can train a model using [`train.py`](processing/train.py):
+Once the dataset is available, you can train a model using [train.py](processing/train.py):
 ```bash
 python train.py --model "TransformerEncoder" --datecrop 'random' -b 512 -e 120 -m "evaluation1" -D "./catcrops_dataset/" --weight-decay 5e-08 --learning-rate 1e-3 --preload-ram -l "./RESULTS" --use_previous_year_TS --sparse --cp --doa  --L2A --pclassid --pcrop --pvar --sreg --mun --com --prov --elev --slope --trial "Trial01"
 ```
 
 #### 3. Run a Test  
-After training, you can evaluate the model using [`test.py`](processing/test.py):
+After training, you can evaluate the model using [test.py](processing/test.py):
 ```bash
 python test.py --model "TransformerEncoder" --datecrop '31/07/2023' -b 512 -m "test2023" -D "./catcrops_dataset/" --weight-decay 5e-08 --learning-rate 1e-3 --preload-ram -l "./RESULTS" --use_previous_year_TS --sparse --cp --doa --L2A --pclassid --pcrop --pvar --sreg --mun --com --prov --elev --slope --do_shp --trial "Trial01"
 ```
@@ -125,14 +129,14 @@ A pre-trained model is already available in the repository, so if you want to ru
 python test.py --model "TransformerEncoder" --datecrop '31/07/2023' -b 512 -e 78 -m "test2023" -D "./catcrops_dataset/" --weight-decay 5e-08 --learning-rate 1e-3 --preload-ram -l "./RESULTS" --use_previous_year_TS --sparse --cp --doa --L2A --pclassid --pcrop --pvar --sreg --mun --com --prov --elev --slope --do_shp --trial "Trial00"
 ```
 
-### Sentinel-2 Data Download
+## Sentinel-2 Data Download
 
 To download Sentinel-2 data using [Google Earth Engine](https://earthengine.google.com/), the script 
-[`"gee_S2_download.py"`](processing/gee_S2_download.py) is used. This script allows you to retrieve Sentinel-2 imagery 
+[gee_S2_download.py](processing/gee_S2_download.py) is used. This script allows you to retrieve Sentinel-2 imagery 
 directly from Google Earth Engine for further processing.
 
 To use this script, ensure that Google Earth Engine is installed and properly configured on your system. Once set up, 
-navigate to the `processing/` directory and execute:
+navigate to the [processing](processing) directory and execute:
 
 ```bash
 python gee_S2_download.py
@@ -140,9 +144,9 @@ python gee_S2_download.py
 
 This will start the data download process according to the predefined parameters in the script.
 
-#### Example: Download Sentinel-2 Data for Lleida (2023)
+### Example: Download Sentinel-2 Data for Lleida (2023)
 If you want to download Sentinel-2 data for the **Lleida region** corresponding to the **2023 dataset**, navigate to
-the `processing/` directory and run:
+the [processing](processing) directory and run:
 
 ```bash
 python gee_S2_download.py -Z lleida -A 2023 -I 20220101 -F 2024010 -D ./catcrops_dataset
@@ -170,7 +174,7 @@ You can explore the crop classification results on the interactive map:
 
 ### Acknowledgment and Reference to BreizhCrops
 The BreizhCrops repository ([BreizhCrops GitHub](https://github.com/dl4sits/BreizhCrops)) has been used as a starting point for the development of `CatCrops`. 
-We used its dataset structure as a reference to design and organize the `CatCrops` dataset, adapting it to our specific needs.
+We used its dataset structure as a reference to design and organize the CatCrops Dataset, adapting it to our specific needs.
 The only scripts that remain unchanged from the original BreizhCrops repository are those that define the different deep learning models.
 
 ## Reference
