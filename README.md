@@ -48,7 +48,7 @@ immediately without needing to reinstall.
 #### 5. Verify the Installation  
 To confirm that everything is installed correctly, run:  
 ```bash
-python -c "import catcrops; print('CatCrops installed successfully!')"  
+python -c "import catcrops; print('CatCrops installed successfully')"  
 ```
 Now, CatCrops is ready to use within your Anaconda environment.
 
