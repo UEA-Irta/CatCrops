@@ -110,3 +110,30 @@ Each parcel's timeseries data is stored as a separate CSV file. The filename cor
 - `$Label`: Crop type ID, using the classification codes from `codes.csv`.
 - `$id`: Parcel ID, same as the filename.
 
+
+## Crop Types
+The dataset contains the following crop types:
+
+| Abbreviation | Catalan Name           | English Name           |
+|-------------|------------------------|------------------------|
+| AE          | Altres extensius        | Other extensive        |
+| AL          | Alfals                  | Alfalfa                |
+| AR          | Arròs                   | Rice                   |
+| CB          | Cebes                   | Onion                  |
+| CH          | Cereals d'hivern        | Winter cereals         |
+| C           | Colza                   | Rapeseed               |
+| CP          | Cultius permanents      | Orchards               |
+| DCP         | Dc panís                | Double Crop Maize      |
+| DCGS        | Dc gira-sol             | Double Crop Sunflower  |
+| G           | Guaret                  | Fallow                 |
+| GS          | Gira-sol                | Sunflower              |
+| H           | Horta                   | Vegetables             |
+| OL          | Oliverar                | Olives                 |
+| P           | Panís                   | Maize                  |
+| PR          | Protaginoses            | Fabaceae               |
+| RF          | Ray-grass festuca       | Ray Grass and Festuca  |
+| SJ          | Soja                    | Soybean                |
+| SR          | Sorgo                   | Sorghum                |
+| VÇ          | Veça                    | Vetch                  |
+| VV          | Vivers                  | Nurseries              |
+| VY          | Vinya                   | Vineyard               |
