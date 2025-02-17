@@ -2,7 +2,7 @@
 #
 # This file is part of SEN-ET project.
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # Llegeix les dependències des del fitxer requirements.txt
 def parse_requirements(filename):
@@ -22,7 +22,7 @@ requirements = parse_requirements('requirements.txt')
 setup(
     name='catcrops',
     version='1.0',
-    packages=['catcrops'],
+    packages=find_packages(),
     url='https://github.com/UEA-Irta/CatCrops',
     license='GPL',
     author='Jordi Gené Mola',
