@@ -166,13 +166,13 @@ python train.py --model "TransformerEncoder" --datecrop 'random' -b 512 -e 120 -
 #### 3. Run a Test  
 After training, you can evaluate the model using [test.py](processing/test.py):
 ```bash
-python test.py --model "TransformerEncoder" --datecrop '31/07/2023' -b 512 -m "test2023" -D "./catcrops_dataset/" --weight-decay 5e-08 --learning-rate 1e-3 --preload-ram -l "./RESULTS" --use_previous_year_TS --sparse --cp --doa --L2A --pclassid --pcrop --pvar --sreg --mun --com --prov --elev --slope --do_shp --trial "Trial01"
+python test.py --model "TransformerEncoder" --datecrop "31/07/2023" -b 512 -m "test2023" -D "./catcrops_dataset/" --weight-decay 5e-08 --learning-rate 1e-3 --preload-ram -l "./RESULTS" --use_previous_year_TS --sparse --cp --doa --L2A --pclassid --pcrop --pvar --sreg --mun --com --prov --elev --slope --do_shp --trial "Trial01"
 ```
 
 #### 4. Running a Test Using a Pre-Trained Model  
 A pre-trained model is already available in the repository, so if you want to run a test without training a new model, execute:
 ```bash
-python test.py --model "TransformerEncoder" --datecrop '31/07/2023' -b 512 -e 78 -m "test2023" -D "./catcrops_dataset/" --weight-decay 5e-08 --learning-rate 1e-3 --preload-ram -l "./RESULTS" --use_previous_year_TS --sparse --cp --doa --L2A --pclassid --pcrop --pvar --sreg --mun --com --prov --elev --slope --do_shp --trial "Trial00"
+python test.py --model "TransformerEncoder" --datecrop "31/07/2023" -b 512 -e 78 -m "test2023" -D "./catcrops_dataset/" --weight-decay 5e-08 --learning-rate 1e-3 --preload-ram -l "./RESULTS" --use_previous_year_TS --sparse --cp --doa --L2A --pclassid --pcrop --pvar --sreg --mun --com --prov --elev --slope --do_shp --trial "Trial00"
 ```
 
 ## Generated Files

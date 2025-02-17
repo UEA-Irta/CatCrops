@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# This file is part of SEN-ET project.
+# This file is part of CatCrops project.
 
 from setuptools import setup, find_packages
 
@@ -19,12 +19,17 @@ SHORT_DESCRIPTION = ("A remote sensing-based library for crop classification usi
 # Càrrega de les dependències
 requirements = parse_requirements('requirements.txt')
 
+# Extra requeriments
+extras_require_dict={
+    "gee": ["earthengine-api", "geemap", "geopy","rtree"]
+}
+
 setup(
     name='catcrops',
     version='1.0',
     packages=find_packages(include=['catcrops', 'catcrops.*']),
     url='https://github.com/UEA-Irta/CatCrops',
-    license='GPL',
+    license='GPL-3.0',
     author='Jordi Gené Mola',
     author_email='jordi.gene@irta.cat',
     maintainer='Magí Pàmies Sans',
@@ -34,12 +39,34 @@ setup(
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     install_requires=requirements,  # Dependències des del requirements.txt
+    extras_require=extras_require_dict,
     python_requires='>=3.10',
     classifiers=[
-        "Development Status :: Beta",
+        "Development Status :: 4 - Beta",
+        "Environment :: GPU :: NVIDIA CUDA",
+        "Operating System :: OS Independent",
         "Intended Audience :: Science/Research",
-        "Topic :: Scientific/Engineering :: Agricultural Science",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Education",
+        "Topic :: Scientific/Engineering :: Artificial Intelligence",
+        "Topic :: Scientific/Engineering :: GIS",
         "Topic :: Software Development :: Libraries :: Python Modules",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "Natural Language :: English",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3"]
+        "Programming Language :: Python :: 3"
+    ],
+    keywords=[
+        "crop classification",
+        "Sentinel-2",
+        "deep learning",
+        "Transformer",
+        "GIS",
+        "agriculture",
+        "remote sensing",
+        "time series",
+        "machine learning",
+        "Google Earth Engine",
+        "DUN"
+    ]
 )
