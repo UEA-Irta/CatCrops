@@ -110,4 +110,3 @@ Each parcel's timeseries data is stored as a separate CSV file. The filename cor
 - `$Label`: Crop type ID, using the classification codes from `codes.csv`.
 - `$id`: Parcel ID, same as the filename.
 
-This dataset structure ensures efficient organization of crop classification data, remote sensing imagery, and metadata for further analysis.
