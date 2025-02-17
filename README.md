@@ -2,9 +2,12 @@
 
 This repository contains the implementation of CatCrops, which is used in the scientific paper: 
  
-"Early Crop Type Classification and Mapping Combining Remote Sensing and Ancillary Data" by Gené-Mola, J., Pamies-Sans, M., Minuesa, C., Casadesús, J., and Bellvert, J. (2025, submitted).
+> **"Early Crop Type Classification and Mapping Combining Remote Sensing and Ancillary Data"**  
+> *by Gené-Mola, J., Pamies-Sans, M., Minuesa, C., Casadesús, J., and Bellvert, J. (2025, submitted).*
  
 The README will be expanded upon the publication of the corresponding research paper.
+
+CatCrops is a Python library for early crop type classification using remote sensing and ancillary data.  It utilizes Sentinel-2 satellite data, previous crop history, and irrigation system information, among other features, to enhance classification accuracy. The Transformer model is used for time series analysis. 
 
 
 ## Instalation
@@ -129,6 +132,27 @@ A pre-trained model is already available in the repository, so if you want to ru
 python test.py --model "TransformerEncoder" --datecrop '31/07/2023' -b 512 -e 78 -m "test2023" -D "./catcrops_dataset/" --weight-decay 5e-08 --learning-rate 1e-3 --preload-ram -l "./RESULTS" --use_previous_year_TS --sparse --cp --doa --L2A --pclassid --pcrop --pvar --sreg --mun --com --prov --elev --slope --do_shp --trial "Trial00"
 ```
 
+## Generated Files
+
+### Training Output Files
+The [train.py](processing/train.py) script generates the following files:
+* `model_<epoch number>.pth` → Trained model saved at a specific epoch.
+* `trainlog.csv` → Contains statistical metrics for each trained model.
+
+### Testing Output Files
+The [test.py](processing/test.py) script generates the following files for each zone (ll: Lleida, bt: Baix Ter, t: both zones together):
+* `<zone>_cf_prediction.png/csv` → Confusion matrix of predictions in image (.png) and CSV (.csv) formats.
+* `<zone>_cf_true.png/csv` → Confusion matrix of actual crop types (ground truth).
+* `<zone>_cf_values.png/csv` → Confusion matrix with total occurrences of each class.
+* `<zone>_cf_all.png/csv` → Confusion matrix with percentage-based representation of classification results.
+* `<zone>_classification_report.txt` → Detailed classification metrics per crop type (precision, recall, F1-score).
+* `<zone>_y_pred.npy` → Numpy array storing predicted crop types for the test set.
+* `<zone>_y_score.npy` → Numpy array with confidence scores for each prediction in the test set.
+* `<zone>_y_true.npy` → Numpy array containing actual crop types (ground truth) for the test set.
+* `<zone>_fields_ids.npy` → Numpy array mapping field IDs to their corresponding predictions.
+* `scores_allz.csv` → Summary file comparing classification statistics across different test zones.
+* `shp/<zone>_pred.shp` → Shapefile containing vector data of agricultural parcels, including previous information and model predictions.
+
 ## Sentinel-2 Data Download
 
 To download Sentinel-2 data using [Google Earth Engine](https://earthengine.google.com/), the script 
@@ -184,7 +208,8 @@ You can explore the crop classification results on the [CatCrops Interactive Map
 
 
 ## Reference
-"Early Crop Type Classification and Mapping Combining Remote Sensing and Ancillary Data" by Gené-Mola, J., Pamies-Sans, M., Minuesa, C., Casadesús, J., and Bellvert, J. (2025, submitted).
+> **"Early Crop Type Classification and Mapping Combining Remote Sensing and Ancillary Data"**  
+> *by Gené-Mola, J., Pamies-Sans, M., Minuesa, C., Casadesús, J., and Bellvert, J. (2025, submitted).*
 
 
 ## Contact
