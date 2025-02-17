@@ -8,7 +8,7 @@ This repository contains the implementation of CatCrops, which is used in the sc
 The README will be expanded upon the publication of the corresponding research paper.
 
 CatCrops is a Python library for early crop type classification using remote sensing and ancillary data.  It utilizes Sentinel-2 satellite data, previous crop history, and irrigation system information, among other features, to enhance classification accuracy. The Transformer model is used for time series analysis. 
-aa
+
 
 ## Instalation
 To ensure proper functionality, we recommend using Anaconda to manage dependencies. Follow these steps to install the 
