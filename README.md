@@ -9,6 +9,49 @@ The README will be expanded upon the publication of the corresponding research p
 
 CatCrops is a Python library for early crop type classification using remote sensing and ancillary data.  It utilizes Sentinel-2 satellite data, previous crop history, and irrigation system information, among other features, to enhance classification accuracy. The Transformer model is used for time series analysis. 
 
+## Repository Structure
+
+The CatCrops repository is structured as follows:
+```tree
+CatCrops/
+├── catcrops/                       # Core library containing dataset handling, models, and transformations
+│   ├── datasets/                   # Dataset utilities
+│   │   ├── catcrops.py             # Functions for dataset loading and processing
+│   │   └── __init__.py
+│   ├── models/                     # Implementation of deep learning models
+│   │   ├── __init__.py
+│   │   ├── LongShortTermMemory.py  # LSTM model
+│   │   ├── MSResNet.py             # Multi-Scale ResNet model
+│   │   ├── OmniScaleCNN.py         # Omni-Scale CNN model
+│   │   ├── StarRNN.py              # Star RNN model
+│   │   ├── TempCNN.py              # Temporal CNN model
+│   │   └── TransformerModel.py     # Transformer-based model
+│   ├── evaluation_utils.py         # Utility functions for model evaluation
+│   ├── transforms.py               # Data transformation utilities
+│   └── __init__.py
+│
+├── processing/                     # Scripts for data processing, training, and testing
+│   ├── download_dataset.py         # Script to download and prepare the dataset
+│   ├── gee_S2_download.py          # Script to retrieve Sentinel-2 data using Google Earth Engine
+│   ├── RESULTS/                    # Directory for storing trained models
+│   │   └── Trial00/
+│   │       └── model_78.pth        # Example trained model checkpoint
+│   ├── TEST/                       # Directory for test results
+│   ├── test.py                     # Script for testing the model
+│   └── train.py                    # Script for training the model
+│
+├── docs/                           # Documentation and additional resources
+│   ├── CatCrops_Dataset.md         # Dataset documentation
+│   └── catcrops_map.jpg            # Image for README visualization
+│
+├── env_catcrops.yml                # Conda environment file with dependencies
+├── env_catcrops_nocuda.yml         # Alternative Conda environment file without CUDA
+├── requirements.txt                # List of Python dependencies
+├── setup.py                        # Setup script for installing the package
+├── LICENSE                         # License file
+└── README.md                       # Project documentation
+```
+
 
 ## Instalation
 To ensure proper functionality, we recommend using Anaconda to manage dependencies. Follow these steps to install the 
