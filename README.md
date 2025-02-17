@@ -68,7 +68,7 @@ already generated from the following link:
 ### How to Download and Extract the Dataset Automatically
 You can automatically download and extract the dataset using the script [download_dataset.py](processing/download_dataset.py).
 
-Navigate to the [processing](processing) folder and execute:
+Navigate to the [`\processing`](processing) folder and execute:
 ```bash
 python download_dataset.py --url "https://www.kaggle.com/api/v1/datasets/download/irtaremotesensing/catcrops-dataset-csv" --zip_path "catcrops_dataset.zip" --extract_folder "./"
 ```
@@ -104,7 +104,7 @@ explains how the dataset is organized.
 ## Usage examples
 
 To run an example of training and testing using the CatCrops library, follow these steps. All commands must be 
-executed from the [processing](processing) directory.
+executed from the [`\processing`](processing) directory.
 
 #### 1. Download the Dataset  
 If you have not yet downloaded the dataset, first run:
@@ -136,7 +136,7 @@ To download Sentinel-2 data using [Google Earth Engine](https://earthengine.goog
 directly from Google Earth Engine for further processing.
 
 To use this script, ensure that Google Earth Engine is installed and properly configured on your system. Once set up, 
-navigate to the [processing](processing) directory and execute:
+navigate to the [`\processing`](processing) directory and execute:
 
 ```bash
 python gee_S2_download.py
@@ -146,7 +146,7 @@ This will start the data download process according to the predefined parameters
 
 ### Example: Download Sentinel-2 Data for Lleida (2023)
 If you want to download Sentinel-2 data for the **Lleida region** corresponding to the **2023 dataset**, navigate to
-the [processing](processing) directory and run:
+the [`\processing`](processing) directory and run:
 
 ```bash
 python gee_S2_download.py -Z lleida -A 2023 -I 20220101 -F 2024010 -D ./catcrops_dataset
