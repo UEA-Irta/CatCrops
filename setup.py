@@ -22,7 +22,7 @@ requirements = parse_requirements('requirements.txt')
 setup(
     name='catcrops',
     version='1.0',
-    packages=find_packages(),
+    packages=find_packages(include=['catcrops', 'catcrops.*']),
     url='https://github.com/UEA-Irta/CatCrops',
     license='GPL',
     author='Jordi Gené Mola',
