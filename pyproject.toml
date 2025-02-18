@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "catcrops"
+version = "1.0"
+description = "A remote sensing-based library for crop classification using Sentinel-2 imagery and the Transformer model for time series analysis."
+readme = "README.md"
+license = { text = "GPL-3.0", files = "LICEN[CS]E.*" }
+authors = [
+    { name = "Jordi Gené Mola", email = "jordi.gene@irta.cat" },
+    { name = "Magí Pàmies Sans", email = "magipamies@gmail.com" }
+]
+maintainers = [
+    { name = "Jordi Gené Mola", email = "jordi.gene@irta.cat" },
+    { name = "Magí Pàmies Sans", email = "magipamies@gmail.com" }
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: GPU :: NVIDIA CUDA",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: GIS",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Natural Language :: English",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3"
+]
+keywords = [
+    "crop classification",
+    "Sentinel-2",
+    "deep learning",
+    "Transformer",
+    "GIS",
+    "agriculture",
+    "remote sensing",
+    "time series",
+    "machine learning",
+    "Google Earth Engine",
+    "DUN"
+]
+
+requires-python = ">=3.10"
+dependencies = [
+    "geopandas",
+    "numpy",
+    "pandas",
+    "geojson",
+    "jupyter",
+    "matplotlib",
+    "seaborn",
+    "torch",
+    "torchvision",
+    "torchaudio",
+    "tqdm",
+    "scikit-learn",
+    "h5py",
+    "requests",
+    "pytest"
+]
+
+
+[project.optional-dependencies]
+gee = ["earthengine-api", "geemap", "geopy", "rtree"]
+
+[project.urls]
+Homepage = "https://github.com/UEA-Irta/CatCrops"
+Repository = "https://github.com/UEA-Irta/CatCrops"
+Issues = "https://github.com/UEA-Irta/CatCrops/issues"
+
+
+[tool.setuptools.packages.find]
+include = ["catcrops", "catcrops.*"]

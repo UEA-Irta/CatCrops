@@ -47,7 +47,7 @@ CatCrops/
 ├── env_catcrops.yml                # Conda environment file with dependencies
 ├── env_catcrops_nocuda.yml         # Alternative Conda environment file without CUDA
 ├── requirements.txt                # List of Python dependencies
-├── setup.py                        # Setup script for installing the package
+├── pyproject.toml                  # Setup script for installing the package
 ├── LICENSE                         # License file
 └── README.md                       # Project documentation
 ```
@@ -256,4 +256,6 @@ You can explore the crop classification results on the [CatCrops Interactive Map
 
 
 ## Contact
-For issues or feature requests, please contact: jordi.gene@irta.cat, magi.pamies@irta.cat.
+For issues or feature requests, please contact:
+* jordi.gene@irta.cat | [GitHub](https://github.com/Jordi-Gene-Mola)
+* magi.pamies@irta.cat | [GitHub](https://github.com/magipamies) 
