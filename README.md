@@ -1,4 +1,5 @@
-# CatCrops - Crop Type Classification Library
+# CatCrops - Crop Type Classification Library 
+![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg) 
 
 This repository contains the implementation of CatCrops, which is used in the scientific paper: 
  
@@ -254,6 +255,21 @@ You can explore the crop classification results on the [CatCrops Interactive Map
 > **"Early Crop Type Classification and Mapping Combining Remote Sensing and Ancillary Data"**  
 > *by Gené-Mola, J., Pamies-Sans, M., Minuesa, C., Casadesús, J., and Bellvert, J. (2025, submitted).*
 
+
+## License  
+
+This project is licensed under the **GNU General Public License v3.0 (GPL v3)**. You can find the full text of the license [here](LICENSE).
+
+### Summary of the License
+
+The GNU General Public License v3.0 is a free, copyleft license for software and other kinds of works. Here are some key points:
+- **Freedom to use**: You can use this software for any purpose.  
+- **Freedom to modify**: You can modify the source code to suit your needs.  
+- **Freedom to share**: You can distribute copies of this software.  
+- **Freedom to contribute**: You can improve the software and share your improvements.  
+- **Copyleft requirement**: If you distribute a modified version, it must also be licensed under GPL v3.  
+
+For more detailed information, please refer to the [LICENSE](LICENSE) file or visit the [official GPL v3 site](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
 ## Contact
 For issues or feature requests, please contact:
