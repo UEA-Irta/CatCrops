@@ -1,12 +1,12 @@
 # CatCrops - Crop Type Classification Library 
 ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg) 
 
-This repository contains the implementation of CatCrops, which is used in the scientific paper: 
- 
+This repository contains the implementation of CatCrops, which is used in the scientific paper:
+
 > **"Early Crop Type Classification and Mapping Combining Remote Sensing and Ancillary Data"**  
-> *by Gené-Mola, J., Pamies-Sans, M., Minuesa, C., Casadesús, J., and Bellvert, J. (2025, submitted).*
- 
-The README will be expanded upon the publication of the corresponding research paper.
+> *by Jordi Gené-Mola, Magí Pamies-Sans, César Minuesa, Jaume Casadesús, Joaquim Bellvert (2026). Computers and Electronics in Agriculture, Volume 253, 112138.*  
+> https://doi.org/10.1016/j.compag.2026.112138
+
 
 CatCrops is a Python library for early crop type classification using remote sensing and ancillary data.  It utilizes Sentinel-2 satellite data, previous crop history, and irrigation system information, among other features, to enhance classification accuracy. The Transformer model is used for time series analysis. 
 
@@ -249,12 +249,14 @@ You can explore the crop classification results on the [CatCrops Interactive Map
 * The data from the DUN has ben obtained from the [Mapa de cultius DUN-SIGPAC](https://agricultura.gencat.cat/ca/ambits/desenvolupament-rural/sigpac/mapa-cultius/index.html)
   of the Department d'Agricultura, Ramaderia, Pesca i Alimentació de la Generalitat de Catalunya.
 
+  
+## Citation
 
+If you use CatCrops in your research, please cite:
 
-## Reference
 > **"Early Crop Type Classification and Mapping Combining Remote Sensing and Ancillary Data"**  
-> *by Gené-Mola, J., Pamies-Sans, M., Minuesa, C., Casadesús, J., and Bellvert, J. (2025, submitted).*
-
+> *by Jordi Gené-Mola, Magí Pamies-Sans, César Minuesa, Jaume Casadesús, Joaquim Bellvert (2026). Computers and Electronics in Agriculture, Volume 253, 112138.*  
+> https://doi.org/10.1016/j.compag.2026.112138
 
 ## License  
 
